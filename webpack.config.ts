@@ -1,14 +1,18 @@
 import path from 'path'
 import webpack from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import type {Configuration as DevServerConfiguration} from 'webpack-dev-server'
 
 type Mode = 'production' | 'development'
 
 interface EnvVariables {
     mode: Mode
+    port: number
 }
 
 export default (env: EnvVariables) => {
+    const isDev = env.mode === 'development'
+
     const config: webpack.Configuration = {
         mode: env.mode ?? 'development',
         entry: path.resolve(__dirname, 'src', 'index.ts'), // путь к точке входа в приложение
@@ -18,8 +22,10 @@ export default (env: EnvVariables) => {
             clean: true // если будем менять название filename и снова собирать то старый файл удалится!
         },
         plugins: [
-            new HtmlWebpackPlugin({template: path.resolve(__dirname, 'public', 'index.html')})
-        ],
+            new HtmlWebpackPlugin({template: path.resolve(__dirname, 'public', 'index.html')}),
+            // HtmlWebpackPlugin - подставляет js скрипты в html в результате сборки
+            isDev && new webpack.ProgressPlugin()
+        ].filter(Boolean),
         module: {
             rules: [ // лоадеры
                 {
@@ -32,6 +38,11 @@ export default (env: EnvVariables) => {
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],  // расширения которые необходимо обработать
         },
+        devtool: isDev? 'inline-source-map': false,
+        devServer: isDev?  {
+            port: env.port ?? 3000,
+            open: true
+        }: undefined
     }
     return config
 }
