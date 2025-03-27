@@ -27,7 +27,11 @@ export default (env: EnvVariables) => {
             isDev && new webpack.ProgressPlugin()
         ].filter(Boolean),
         module: {
-            rules: [ // лоадеры
+            rules: [ // лоадеры - нужны для переоброзования файлов, например для ts, css, svg и т.д.
+                {
+                    test: /\.s[ac]ss$/i,
+                    use: ['style-loader', 'css-loader', 'sass-loader']
+                },
                 {
                     test: /\.tsx?$/, // обрабатываем ts и tsx
                     use: 'ts-loader', // название
