@@ -1,9 +1,9 @@
 import {createRoot} from "react-dom/client";
-import {App} from "./components/App";
+import {App} from "@/components/App";
 import React, {Suspense} from "react";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import {About} from "./components/pages/about";
-import {Shop} from "./components/pages/shop";
+import {About} from "@/components/pages/about";
+import {Shop} from "@/components/pages/shop";
 
 
 const root = document.getElementById('root')

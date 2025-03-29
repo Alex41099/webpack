@@ -8,7 +8,11 @@
     "allowJs": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": ".", // путь до базовой директорий
+    "paths": {      // для того чтобы алиасы работали на ts
+      "@/*": ["./src/*"]
+    }
   },
   "ts-node": {
     "compilerOptions": {
