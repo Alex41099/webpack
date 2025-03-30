@@ -51,7 +51,14 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
   }
   const tsLoader = {
     test: /\.tsx?$/, // обрабатываем ts и tsx
-    use: 'ts-loader', // название
+    use: [
+      {
+        loader: 'ts-loader',
+        options: {
+          transpileOnly: true
+        }
+      }
+    ], // название
     exclude: /node_modules/, // не смотрим папку node_modules
   }
 

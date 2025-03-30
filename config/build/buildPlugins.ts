@@ -4,6 +4,7 @@ import webpack from "webpack";
 import MiniCssExtractPlugin, {Configuration} from "mini-css-extract-plugin";
 import {BuildOptions} from "../types/types";
 import {BundleAnalyzerPlugin} from "webpack-bundle-analyzer";
+import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 
 export function buildPlugins({mode, paths, analyzer, platform}: BuildOptions): Configuration['plugins'] {
   const isDev = mode === 'development'
@@ -18,6 +19,7 @@ export function buildPlugins({mode, paths, analyzer, platform}: BuildOptions): C
 
   if (isDev) {
     plugins.push(new webpack.ProgressPlugin())
+    plugins.push(new ForkTsCheckerWebpackPlugin())
   }
 
   if (isProd) {
