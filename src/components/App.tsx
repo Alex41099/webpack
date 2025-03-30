@@ -8,7 +8,7 @@ import IconSvg from '../assets/free-icon-font-chart-histogram-5528038.svg'
 
 export const App = () => {
   if (__PLATFORM__ === 'desktop') {
-    return <div>ISDESKTOPPLATFORM</div>
+    return <div>ISDESKTOPPLATFOR</div>
   }
   if (__PLATFORM__ === 'mobile') {
     return <div>ISMOBILEPLATFORM</div>
