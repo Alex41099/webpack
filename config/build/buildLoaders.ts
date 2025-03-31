@@ -37,7 +37,7 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
     loader: 'css-loader',
     options: {
       modules: {
-        localIdentName: isDev? '[path][name]__[local]' : '[hash:base64:8]'
+        localIdentName: isDev ? '[path][name]__[local]' : '[hash:base64:8]'
       }
     }
   }
@@ -65,11 +65,31 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
     ], // название
     exclude: /node_modules/, // не смотрим папку node_modules
   }
+  const babelLoader = {
+    test: /\.(js|jsx|ts|tsx)$/,
+    exclude: /node_modules/,
+    use: {
+      loader: 'babel-loader',
+      // options: { // любо тут пишем любо в "babel.config.json"
+      //   presets: [
+      //     '@babel/preset-env',
+      //     '@babel/preset-typescript',
+      //     [
+      //       '@babel/preset-react',
+      //       {
+      //         runtime: isDev ? 'automatic' : 'classic'
+      //       }
+      //     ],
+      //   ]
+      // }
+    }
+  }
 
   return [
     assetsLoader,
     scssLoader,
-    tsLoader,
+    // tsLoader,
+    babelLoader,
     svgLoader
   ]
 }
