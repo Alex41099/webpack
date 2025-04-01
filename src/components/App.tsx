@@ -7,11 +7,16 @@ import IconSvg from '../assets/free-icon-font-chart-histogram-5528038.svg'
 
 
 export const App = () => {
-  if (__PLATFORM__ === 'desktop') {
-    return <div>ISDESKTOPPLATFOR</div>
+
+  function func() {
+    func2()
   }
-  if (__PLATFORM__ === 'mobile') {
-    return <div>ISMOBILEPLATFORM</div>
+  function func2() {
+    throw new Error()
+  }
+
+  const click = () => {
+    func()
   }
 
   return (
@@ -23,7 +28,7 @@ export const App = () => {
       </div>
       <Link to={'/about'}>About</Link>
       <Link to={'/shop'}>Shop</Link>
-      <button className={classes.button}>+</button>
+      <button className={classes.button} onClick={click}>+</button>
       <Outlet/>
     </div>
   );
